@@ -38,7 +38,8 @@ module SproutCore
         if current_bundle.nil?
           # if proxy url, return proxy...
           url = request.path
-          proxy_url, proxy_opts = library.proxy_url_for(url) 
+          url += '?' + request.query_string unless request.query_string.blank?
+          proxy_url, proxy_opts = library.proxy_url_for(url)
           if proxy_url 
             return handle_proxy(url, proxy_url, proxy_opts)
           else
